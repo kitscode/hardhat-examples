@@ -1,0 +1,13 @@
+node_modules
+.env
+
+#Hardhat files
+cache
+artifacts
+typechain
+deployments
+
+#Local files
+.idea
+docs
+coverage.json
