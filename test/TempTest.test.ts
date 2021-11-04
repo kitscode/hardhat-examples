@@ -24,7 +24,7 @@ describe('TempTest', () => {
 
     it("check random number", async function () {
         const {owner} = await setup();
-        expect(await owner.TempTest.randomNum(0, 100)).to.gt(0).lt(100);
+        expect(await owner.TempTest.randomNum(0, 100)).to.lt(100);
     });
 });
 

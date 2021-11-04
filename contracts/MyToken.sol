@@ -12,11 +12,10 @@ contract MyToken is ERC20, AccessControl {
     constructor(address minter) ERC20("MyToken", "TKN") {
         // Grant the minter role to a specified account
         _setupRole(MINTER_ROLE, minter);
+        _setupRole(DEFAULT_ADMIN_ROLE, minter);
     }
 
-    function mint(address to, uint256 amount) public {
-        // Check that the calling account has the minter role
-        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
         _mint(to, amount);
     }
 
