@@ -11,3 +11,4 @@ deployments
 .idea
 docs
 coverage.json
+.DS_Store

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 import "./library/SafeMath.sol";
 
@@ -21,5 +21,10 @@ contract TempTest {
         uint256 randomPercent = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, msg.sender, distance))) % 100;
         return min + distance * randomPercent / 100;
     }
-
+    
+    function multiBigNumber() public pure returns (uint256){
+        uint256 a = 58823529411764705882352;
+        uint256 b = 850000;
+        return a * b;
+    }
 }
