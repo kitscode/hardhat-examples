@@ -32,6 +32,10 @@ describe('TempTest', () => {
     it("check multi big number", async function () {
         const {owner} = await setup();
         console.log("big number:", (await owner.TempTest.multiBigNumber()).toString());
+
+        let a: number = 1;
+        let b: string = '2';
+        console.log("ts test:", a + b);
     });
 });
 

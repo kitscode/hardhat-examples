@@ -12,3 +12,4 @@ deployments
 docs
 coverage.json
 .DS_Store
+dist
