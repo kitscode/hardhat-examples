@@ -37,5 +37,11 @@ describe('TempTest', () => {
         let b: string = '2';
         console.log("ts test:", a + b);
     });
+
+
+    it("check append", async function () {
+        const {owner} = await setup();
+        console.log("append", (await owner.TempTest.append("aaa", "bbb")).toString());
+    });
 });
 

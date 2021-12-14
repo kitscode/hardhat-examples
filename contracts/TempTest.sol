@@ -27,4 +27,9 @@ contract TempTest {
         uint256 b = 850000;
         return a * b;
     }
+
+    function append(string memory a, string memory b) public returns (string memory) {
+        //string(bytes.concat(bytes(a), "-", bytes(b)));
+        return string(abi.encodePacked(a, b));
+    }
 }
