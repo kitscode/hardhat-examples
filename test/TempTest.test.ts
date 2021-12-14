@@ -41,7 +41,7 @@ describe('TempTest', () => {
 
     it("check append", async function () {
         const {owner} = await setup();
-        console.log("append", (await owner.TempTest.append("aaa", "bbb")).toString());
+        console.log("append", (await owner.TempTest.append("hello, here is: ", "jack")).toString());
     });
 });
 

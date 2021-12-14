@@ -21,15 +21,15 @@ contract TempTest {
         uint256 randomPercent = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, msg.sender, distance))) % 100;
         return min + distance * randomPercent / 100;
     }
-    
+
     function multiBigNumber() public pure returns (uint256){
         uint256 a = 58823529411764705882352;
         uint256 b = 850000;
         return a * b;
     }
 
-    function append(string memory a, string memory b) public returns (string memory) {
-        //string(bytes.concat(bytes(a), "-", bytes(b)));
-        return string(abi.encodePacked(a, b));
+    function append(string memory a, string memory b) public pure returns (string memory result) {
+        result = string(bytes.concat(bytes(a), bytes(b)));
+        // result = string(abi.encodePacked(a, b));
     }
 }
