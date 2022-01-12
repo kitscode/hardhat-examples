@@ -1,13 +1,14 @@
 import {ethers, deployments, getNamedAccounts} from 'hardhat';
 import {expect} from './utils/chai-setup';
 import {setupUser} from './utils';
-import {TempTest} from "../typechain";
+import {MyToken, TempTest} from "../typechain";
 import {parseEther} from "ethers/lib/utils";
 
 
 const setup = deployments.createFixture(async () => {
     await deployments.fixture();
     const contracts = {
+        MyToken: await ethers.getContract<MyToken>('MyToken'),
         TempTest: await ethers.getContract<TempTest>('TempTest')
     };
     const {owner} = await getNamedAccounts();
@@ -39,9 +40,32 @@ describe('TempTest', () => {
     });
 
 
-    it("check append", async function () {
+    it("check concat", async function () {
         const {owner} = await setup();
-        console.log("append", (await owner.TempTest.append("hello, here is: ", "jack")).toString());
+
+        let r = await owner.TempTest.concatString("hello, here is: ", "jack");
+        console.log("concat0:", r[0]);
+        console.log("concat1:", r[1]);
+    });
+
+    it("check address", async function () {
+        const {owner, MyToken} = await setup();
+
+        await owner.TempTest.setToken(MyToken.address);
+        let res = await owner.TempTest.getToken();
+        console.log("address result:", res);
+    });
+
+    it("check amount", async function () {
+        const {owner} = await setup();
+        await owner.TempTest.amountDivide();
+    });
+
+    it("test type", async function () {
+        const {owner} = await setup();
+        const res = await owner.TempTest.testType();
+        // console.log("type bytecode: ", res);
+        console.log("length: ", res.substring(0, 64))
     });
 });
 

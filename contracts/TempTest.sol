@@ -2,10 +2,15 @@
 pragma solidity ^0.8.4;
 
 import "./library/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "hardhat/console.sol";
+import "./MyToken.sol";
 
 contract TempTest {
 
     using SafeMath for uint256;
+
+    IERC20 public token;
 
     function getYearSecond() public pure returns (uint256 a){
         a = 365 days;
@@ -28,8 +33,29 @@ contract TempTest {
         return a * b;
     }
 
-    function append(string memory a, string memory b) public pure returns (string memory result) {
-        result = string(bytes.concat(bytes(a), bytes(b)));
-        // result = string(abi.encodePacked(a, b));
+    function concatString(string memory a, string memory b) public pure returns (string memory r1, string memory r2) {
+        r1 = string(bytes.concat(bytes(a), bytes(b)));
+        r2 = string(abi.encodePacked(a, b));
+    }
+
+    function setToken(address _token) public {
+        token = IERC20(_token);
+    }
+
+    function getToken() public view returns (IERC20, address){
+        return (token, address(token));
+    }
+
+    function amountDivide() public view returns (uint256){
+        uint256 amountV = 12212446911748192486079752325135052781399568695204286982036542063334587891712;
+        uint256 amount = uint248(amountV);
+
+        console.log("amount:", amount);
+        return amount;
+    }
+
+    function testType() public view returns (bytes memory){
+        bytes memory bytecode = type(MyToken).creationCode;
+        return bytecode;
     }
 }

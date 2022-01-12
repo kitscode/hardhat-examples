@@ -19,6 +19,11 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
         log: true
     });
 
+    await deploy('Create', {
+        from: owner,
+        args: [],
+        log: true
+    });
 };
 export default func;
 func.tags = ['TempTest'];

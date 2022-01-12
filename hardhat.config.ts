@@ -1,4 +1,3 @@
-
 import {task} from "hardhat/config";
 import "@nomiclabs/hardhat-waffle";
 import '@nomiclabs/hardhat-ethers';
@@ -6,7 +5,6 @@ import 'hardhat-deploy';
 import '@typechain/hardhat';
 import {HardhatUserConfig} from 'hardhat/types';
 import "solidity-coverage";
-import 'hardhat-docgen';
 
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -24,16 +22,18 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 const config: HardhatUserConfig = {
     solidity: {
-        version: '0.8.4',
+        compilers: [
+            {
+                version: "0.8.4"
+            },
+            {
+                version: "0.6.6"
+            }
+        ]
     },
     namedAccounts: {
         owner: 0,
         user1: 1,
-    },
-    docgen:{
-        path: './docs',
-        clear: true,
-        runOnCompile: true,
     }
 }
 export default config;
