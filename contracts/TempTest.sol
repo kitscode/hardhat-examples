@@ -58,4 +58,8 @@ contract TempTest {
         bytes memory bytecode = type(MyToken).creationCode;
         return bytecode;
     }
+
+    function testUintMax() public pure returns (uint256, uint256){
+        return (~uint256(0), 2 ** 256 - 1);
+    }
 }

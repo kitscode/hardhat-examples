@@ -1,4 +1,5 @@
 import {DeployFunction} from 'hardhat-deploy/types';
+import {parseEther} from "ethers/lib/utils";
 
 
 const func: DeployFunction = async function ({deployments, getNamedAccounts, network, getChainId}) {
@@ -22,6 +23,12 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
     await deploy('Create', {
         from: owner,
         args: [],
+        log: true
+    });
+
+    await deploy('TokenBig', {
+        from: owner,
+        args: [parseEther("10000")],
         log: true
     });
 };

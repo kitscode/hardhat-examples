@@ -67,5 +67,12 @@ describe('TempTest', () => {
         // console.log("type bytecode: ", res);
         console.log("length: ", res.substring(0, 64))
     });
+
+    it("test max", async function () {
+        const {owner} = await setup();
+        let r = await owner.TempTest.testUintMax();
+        console.log("max0:", r[0]);
+        console.log("max1:", r[1]);
+    });
 });
 

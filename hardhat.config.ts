@@ -5,6 +5,7 @@ import 'hardhat-deploy';
 import '@typechain/hardhat';
 import {HardhatUserConfig} from 'hardhat/types';
 import "solidity-coverage";
+import '@openzeppelin/hardhat-upgrades';
 
 
 // This is a sample Hardhat task. To learn how to create your own go to

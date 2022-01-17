@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "hardhat/console.sol";
-
 contract D {
     uint public x;
     constructor(uint a) {
@@ -15,7 +13,7 @@ contract Create {
     function createDSalted(address salt_seed, uint arg) public {
 
         bytes32 salt = keccak256(abi.encodePacked(salt_seed));
-
+        
         // This complicated expression just tells you how the address
         // can be pre-computed. It is just there for illustration.
         // You actually only need ``new D{salt: salt}(arg)``.
@@ -31,8 +29,6 @@ contract Create {
 
         D d = new D{salt : salt}(arg);
 
-        console.log("predictedAddress:", predictedAddress);
-        console.log("d address:", address(d));
         require(address(d) == predictedAddress);
     }
 
@@ -52,8 +48,6 @@ contract Create {
 
         D d = new D(arg);
 
-        console.log("predictedAddress2:", predictedAddress);
-        console.log("d address2:", address(d));
-        require(address(d) == predictedAddress);
+        require(address(d) != predictedAddress);
     }
 }
