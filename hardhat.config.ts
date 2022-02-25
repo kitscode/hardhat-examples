@@ -7,6 +7,7 @@ import {HardhatUserConfig} from 'hardhat/types';
 import "solidity-coverage";
 import '@openzeppelin/hardhat-upgrades';
 
+const secret = require("./secret.json");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -35,6 +36,16 @@ const config: HardhatUserConfig = {
     namedAccounts: {
         owner: 0,
         user1: 1,
+    },
+    networks: {
+        hardhat: {
+            forking: {
+                url: secret.forking_bsc_mainnet,
+                // blockNumber: 14274296,
+                blockNumber: 15560137,
+                enabled: true
+            }
+        }
     }
 }
 export default config;

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./library/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "hardhat/console.sol";
 import "./MyToken.sol";
@@ -50,16 +50,20 @@ contract TempTest {
         uint256 amountV = 12212446911748192486079752325135052781399568695204286982036542063334587891712;
         uint256 amount = uint248(amountV);
 
-        console.log("amount:", amount);
+        //console.log("amount:", amount);
         return amount;
     }
 
-    function testType() public view returns (bytes memory){
+    function testType() public pure returns (bytes memory){
         bytes memory bytecode = type(MyToken).creationCode;
         return bytecode;
     }
 
     function testUintMax() public pure returns (uint256, uint256){
         return (~uint256(0), 2 ** 256 - 1);
+    }
+
+    function out(string calldata s) private pure returns (string calldata){
+        return s;
     }
 }

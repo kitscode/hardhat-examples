@@ -5,6 +5,7 @@ node_modules
 cache
 artifacts
 typechain
+deployments
 
 #Local files
 .idea
@@ -13,3 +14,4 @@ coverage.json
 .DS_Store
 dist
 deployments
+secret.json

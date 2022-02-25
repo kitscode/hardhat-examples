@@ -1,19 +1,8 @@
-import {deployments, ethers, getNamedAccounts} from 'hardhat';
-import {setupUser} from './utils';
-import {MyToken, TokenBig} from "../typechain";
+import {setup} from './utils';
+import {TokenBig} from "../typechain";
 import {parseEther} from 'ethers/lib/utils';
-import {expect} from './utils/chai-setup';
+import {expect} from "chai";
 
-const setup = deployments.createFixture(async () => {
-    await deployments.fixture();
-    const contracts = {
-        TokenBig: await ethers.getContract<TokenBig>('TokenBig')
-    };
-    const {owner, user1} = await getNamedAccounts();
-    return {
-        ...contracts, owner: await setupUser(owner, contracts), user1: await setupUser(user1, contracts)
-    };
-});
 
 describe('TokenBig', () => {
 

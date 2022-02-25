@@ -1,18 +1,5 @@
-import {deployments, ethers, getNamedAccounts} from 'hardhat';
-import {setupUser} from './utils';
+import {setup} from './utils';
 import {Create} from "../typechain";
-
-
-const setup = deployments.createFixture(async () => {
-    await deployments.fixture();
-    const contracts = {
-        Create: await ethers.getContract<Create>('Create'),
-    };
-    const {owner} = await getNamedAccounts();
-    return {
-        ...contracts, owner: await setupUser(owner, contracts)
-    };
-});
 
 describe('Create', () => {
 
