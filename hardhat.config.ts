@@ -43,7 +43,7 @@ const config: HardhatUserConfig = {
                 url: secret.forking_bsc_mainnet,
                 // blockNumber: 14274296,
                 blockNumber: 15560137,
-                enabled: true
+                enabled: false
             }
         }
     }

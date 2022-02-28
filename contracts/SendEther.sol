@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+import "hardhat/console.sol";
+
+//    You can send Ether to other contracts by:
+//    transfer (2300 gas, throws error)
+//    send (2300 gas, returns bool)
+//    call (forward all gas or set gas, returns bool)
+
 contract ReceiveEther {
     /*
     Which function is called, fallback() or receive()?
