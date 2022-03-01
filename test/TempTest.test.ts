@@ -1,5 +1,4 @@
 import {TempTest} from "../typechain";
-import {parseEther} from "ethers/lib/utils";
 import {expect} from "chai";
 import {setup} from './utils';
 

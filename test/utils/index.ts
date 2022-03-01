@@ -1,6 +1,15 @@
 import {deployments, ethers, getNamedAccounts} from "hardhat";
 import {Contract} from 'ethers';
-import {Create, MyToken, ReceiveEther, SendEther, TempTest, TestERC, TokenBig} from "../../typechain";
+import {
+    Create,
+    MyToken,
+    ReceiveEther,
+    SendEther,
+    TempTest,
+    TestERC, TestGovernor,
+    TimelockController,
+    TokenBig, TokenVote,
+} from "../../typechain";
 
 export async function setupUser<T extends { [contractName: string]: Contract }>(
     address: string,
@@ -23,6 +32,9 @@ export const setup = deployments.createFixture(async () => {
         TestERC: await ethers.getContract<TestERC>('TestERC'),
         ReceiveEther: await ethers.getContract<ReceiveEther>('ReceiveEther'),
         SendEther: await ethers.getContract<SendEther>('SendEther'),
+        TokenVote: await ethers.getContract<TokenVote>('TokenVote'),
+        TimelockController: await ethers.getContract<TimelockController>('TimelockController'),
+        TestGovernor: await ethers.getContract<TestGovernor>('TestGovernor'),
     };
     const {owner, user1} = await getNamedAccounts();
     return {
