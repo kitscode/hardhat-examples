@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 contract TestGovernor is Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
     constructor(ERC20Votes _token, TimelockController _timelock)
     Governor("TestGovernor")
-    GovernorSettings(1 /* 1 block */, 45818 /* 1 week */, 0)
+    GovernorSettings(1 /* 1 block */, 3 /* 1 week */, 0)
     GovernorVotes(_token)
     GovernorVotesQuorumFraction(4)
     GovernorTimelockControl(_timelock)

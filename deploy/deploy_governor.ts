@@ -1,8 +1,9 @@
 import {DeployFunction} from 'hardhat-deploy/types';
+import {ZERO_ADDRESS} from "../utils/constants";
 
 
 const func: DeployFunction = async function ({deployments, getNamedAccounts, network, getChainId}) {
-    const {deploy} = deployments;
+    const {deploy, read, execute} = deployments;
     const {owner} = await getNamedAccounts();
 
     const TokenVote = await deploy('TokenVote', {
@@ -11,19 +12,20 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
         log: true,
     });
 
-    let minDelay = 60 * 10;
-    let users = [owner];
     const TimelockController = await deploy('TimelockController', {
         from: owner,
-        args: [minDelay, users, users],
+        args: [60, [owner], [ZERO_ADDRESS]],
         log: true,
     });
 
-    await deploy('TestGovernor', {
+    const TestGovernor = await deploy('TestGovernor', {
         from: owner,
         args: [TokenVote.address, TimelockController.address],
         log: true,
     });
+
+    const PROPOSER_ROLE = await read("TimelockController", "PROPOSER_ROLE");
+    await execute("TimelockController", {from: owner}, "grantRole", PROPOSER_ROLE, TestGovernor.address);
 
 };
 export default func;

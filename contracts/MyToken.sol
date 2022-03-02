@@ -13,6 +13,7 @@ contract MyToken is ERC20, AccessControl {
         // Grant the minter role to a specified account
         _setupRole(MINTER_ROLE, minter);
         _setupRole(DEFAULT_ADMIN_ROLE, minter);
+        _mint(msg.sender, 100000e18);
     }
 
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {

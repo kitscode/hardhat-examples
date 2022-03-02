@@ -1,4 +1,4 @@
-import {deployments, ethers, getNamedAccounts} from "hardhat";
+import {deployments, ethers, getNamedAccounts, network} from "hardhat";
 import {Contract} from 'ethers';
 import {
     Create,
@@ -43,3 +43,15 @@ export const setup = deployments.createFixture(async () => {
         user1: await setupUser(user1, contracts)
     };
 });
+
+export const mineBlocks = async (blockNumber: number) => {
+    while (blockNumber > 0) {
+        blockNumber--;
+        await network.provider.send("evm_mine");
+    }
+}
+
+export const forwardTime = async (seconds: number) => {
+    await network.provider.send("evm_increaseTime", [seconds]);
+    await network.provider.send("evm_mine");
+}
