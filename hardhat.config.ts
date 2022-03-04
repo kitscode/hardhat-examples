@@ -35,11 +35,18 @@ const config: HardhatUserConfig = {
         user1: 1,
     },
     networks: {
+        bsc_test: {
+            url: secret.url_bsc_testnet,
+            accounts: {
+                mnemonic: secret.mnemonic,
+                count: 5
+            },
+            timeout: 120000
+        },
         hardhat: {
             forking: {
                 url: secret.forking_bsc_mainnet,
-                // blockNumber: 14274296,
-                blockNumber: 15560137,
+                blockNumber: 15753900,
                 enabled: false
             }
         }

@@ -43,7 +43,6 @@ contract Proxy {
     }
 
     fallback() external payable {
-        console.log("in fallback!");
         _delegate(implementation);
     }
 }

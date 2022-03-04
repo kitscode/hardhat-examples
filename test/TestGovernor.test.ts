@@ -27,8 +27,9 @@ describe('TestGovernor', () => {
         const tx = await owner.TestGovernor.propose([myToken.address], [0], [calldata], desc);
         const receipt = await tx.wait();
 
-        // event ProposalCreated modified
-        const proposalId = receipt.logs[0].topics[1];
+        // 0xa948272a69487d97fe13b1351f9dd943bb27b718a5052c9cd28814af2d5e9707
+        const proposalId = receipt.logs[0].data.substring(0, 66);
+        
         const state = await owner.TestGovernor.state(proposalId);
         expect(state).to.eq(0);
 
@@ -44,10 +45,10 @@ describe('TestGovernor', () => {
         const descHash = ethers.utils.id(desc);
         // queue
         await owner.TestGovernor.queue([myToken.address], [0], [calldata], descHash);
-        
+
         // fund the timelock
         await owner.MyToken.transfer(owner.TimelockController.address, transferAmount);
-        
+
         // execute
         await forwardTime(60);
         await owner.TestGovernor.execute([myToken.address], [0], [calldata], descHash);

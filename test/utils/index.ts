@@ -7,8 +7,8 @@ import {
     SendEther,
     TempTest,
     TestERC, TestGovernor,
-    TimelockController,
-    TokenBig, TokenVote, V1, V2,
+    TimelockController, 
+    TokenVote, V1, V2,
 } from "../../typechain";
 
 export async function setupUser<T extends { [contractName: string]: Contract }>(
@@ -28,7 +28,6 @@ export const setup = deployments.createFixture(async () => {
         Create: await ethers.getContract<Create>('Create'),
         MyToken: await ethers.getContract<MyToken>('MyToken'),
         TempTest: await ethers.getContract<TempTest>('TempTest'),
-        TokenBig: await ethers.getContract<TokenBig>('TokenBig'),
         TestERC: await ethers.getContract<TestERC>('TestERC'),
         ReceiveEther: await ethers.getContract<ReceiveEther>('ReceiveEther'),
         SendEther: await ethers.getContract<SendEther>('SendEther'),

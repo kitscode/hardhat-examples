@@ -25,8 +25,6 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
 
     await execute("Proxy", {from: owner}, "setImplementation", V1.address);
 
-    console.log("live:", network.live);
-    
     await deploy('V3', {
         from: owner,
         proxy: true
