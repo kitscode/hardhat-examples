@@ -2,13 +2,13 @@ import {deployments, ethers, getNamedAccounts, network} from "hardhat";
 import {Contract} from 'ethers';
 import {
     Create,
-    MyToken,
+    MyToken, Proxy,
     ReceiveEther,
     SendEther,
     TempTest,
     TestERC, TestGovernor,
     TimelockController,
-    TokenBig, TokenVote,
+    TokenBig, TokenVote, V1, V2,
 } from "../../typechain";
 
 export async function setupUser<T extends { [contractName: string]: Contract }>(
@@ -35,6 +35,9 @@ export const setup = deployments.createFixture(async () => {
         TokenVote: await ethers.getContract<TokenVote>('TokenVote'),
         TimelockController: await ethers.getContract<TimelockController>('TimelockController'),
         TestGovernor: await ethers.getContract<TestGovernor>('TestGovernor'),
+        Proxy: await ethers.getContract<Proxy>('Proxy'),
+        V1: await ethers.getContract<V1>('V1'),
+        V2: await ethers.getContract<V2>('V2'),
     };
     const {owner, user1} = await getNamedAccounts();
     return {

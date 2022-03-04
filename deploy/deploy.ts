@@ -24,12 +24,6 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
         log: true
     });
 
-    await deploy('TokenBig', {
-        from: owner,
-        args: [parseEther("10000")],
-        log: true
-    });
-
     await deploy('TestERC', {
         from: owner,
         args: [],
@@ -50,4 +44,4 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
     
 };
 export default func;
-// func.tags = [''];
+func.tags = ['Tests'];

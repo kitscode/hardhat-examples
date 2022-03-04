@@ -21,7 +21,7 @@ describe('TestGovernor', () => {
         const {owner, user1} = await setup();
 
         const myToken = await ethers.getContractAt<ERC20>("ERC20", owner.MyToken.address);
-        const calldata = myToken.interface.encodeFunctionData("transfer", [user1.address, transferAmount])
+        const calldata = myToken.interface.encodeFunctionData("transfer", [user1.address, transferAmount]);
 
         const desc = "Proposal #1: Give grant to other";
         const tx = await owner.TestGovernor.propose([myToken.address], [0], [calldata], desc);

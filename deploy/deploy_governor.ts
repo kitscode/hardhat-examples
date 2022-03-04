@@ -29,4 +29,4 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
 
 };
 export default func;
-// func.tags = [''];
+func.tags = ['Governor'];
