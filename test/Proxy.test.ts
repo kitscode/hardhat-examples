@@ -16,7 +16,8 @@ describe('Proxy', () => {
 
         const v1Proxy = await ethers.getContractAt<V1>("V1", owner.Proxy.address);
         expect(await v1Proxy.x()).to.eq(0);
-
+        expect(await v1Proxy.implementation()).to.eq(implementation);
+        
         const signer = await ethers.getSigner(owner.address);
         await signer.sendTransaction({
             to: owner.Proxy.address,

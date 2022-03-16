@@ -45,9 +45,9 @@ const config: HardhatUserConfig = {
         },
         hardhat: {
             forking: {
-                url: secret.forking_bsc_mainnet,
-                blockNumber: 15753900,
-                enabled: false
+                url: secret.forking_kovan,
+                blockNumber: 30432230,
+                enabled: true
             }
         }
     }
