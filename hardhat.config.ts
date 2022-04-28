@@ -50,6 +50,9 @@ const config: HardhatUserConfig = {
                 enabled: true
             }
         }
-    }
+    },
+    etherscan: {
+        apiKey: secret.apiKey
+    },
 }
 export default config;
