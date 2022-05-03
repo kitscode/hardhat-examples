@@ -14,7 +14,7 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
 
     const TimelockController = await deploy('TimelockController', {
         from: owner,
-        args: [60, [owner], [ZERO_ADDRESS]],
+        args: [60, [], [ZERO_ADDRESS]],
         log: true,
     });
 
@@ -26,6 +26,14 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
 
     const PROPOSER_ROLE = await read("TimelockController", "PROPOSER_ROLE");
     await execute("TimelockController", {from: owner}, "grantRole", PROPOSER_ROLE, TestGovernor.address);
+
+
+    const GovernorComp = await deploy('GovernorComp', {
+        from: owner,
+        args: [TokenVote.address, TimelockController.address],
+        log: true,
+    });
+    await execute("TimelockController", {from: owner}, "grantRole", PROPOSER_ROLE, GovernorComp.address);
 
 };
 export default func;

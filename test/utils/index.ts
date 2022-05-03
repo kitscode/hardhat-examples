@@ -8,7 +8,7 @@ import {
     TempTest,
     TestERC, TestGovernor,
     TimelockController,
-    TokenVote, V1, V2, Seller
+    TokenVote, V1, V2, Seller, GovernorComp
 } from "../../typechain";
 
 export async function setupUser<T extends { [contractName: string]: Contract }>(
@@ -34,17 +34,19 @@ export const setup = deployments.createFixture(async () => {
         TokenVote: await ethers.getContract<TokenVote>('TokenVote'),
         TimelockController: await ethers.getContract<TimelockController>('TimelockController'),
         TestGovernor: await ethers.getContract<TestGovernor>('TestGovernor'),
+        GovernorComp: await ethers.getContract<GovernorComp>('GovernorComp'),
         Proxy: await ethers.getContract<Proxy>('Proxy'),
         V1: await ethers.getContract<V1>('V1'),
         V2: await ethers.getContract<V2>('V2'),
         FeedRegistryConsumer: await ethers.getContract<FeedRegistryConsumer>('FeedRegistryConsumer'),
         Seller: await ethers.getContract<Seller>('Seller'),
     };
-    const {owner, user1} = await getNamedAccounts();
+    const {owner, user1, user2} = await getNamedAccounts();
     return {
         ...contracts,
         owner: await setupUser(owner, contracts),
-        user1: await setupUser(user1, contracts)
+        user1: await setupUser(user1, contracts),
+        user2: await setupUser(user2, contracts)
     };
 });
 
