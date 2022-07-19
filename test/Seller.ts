@@ -1,7 +1,6 @@
 import {setup} from './utils';
 import {expect} from "chai";
 import {ethers} from "hardhat";
-import {V1} from "../typechain";
 import {parseEther} from "ethers/lib/utils";
 
 

@@ -1,35 +1,32 @@
 import {DeployFunction} from 'hardhat-deploy/types';
+import {ethers, upgrades} from "hardhat";
 
 
 const func: DeployFunction = async function ({deployments, getNamedAccounts, network, getChainId}) {
-    const {deploy, execute} = deployments;
-    const {owner} = await getNamedAccounts();
 
-    await deploy('Proxy', {
-        from: owner,
-        args: [],
-        log: true,
-    });
+    const {save} = deployments;
 
-    const V1 = await deploy('V1', {
-        from: owner,
-        args: [],
-        log: true,
-    });
+    console.log("live:", network.live);
 
-    await deploy('V2', {
-        from: owner,
-        args: [],
-        log: true,
-    });
+    const contractFactory = await ethers.getContractFactory("ContractUUPS");
+    const ContractUUPS = await upgrades.deployProxy(contractFactory, [10], {kind: "uups"});
+    console.log("proxy:", ContractUUPS.address);
 
-    await execute("Proxy", {from: owner}, "setImplementation", V1.address);
+    const implementation = await upgrades.erc1967.getImplementationAddress(ContractUUPS.address);
+    console.log("implementation:", implementation);
 
-    await deploy('V3', {
-        from: owner,
-        proxy: true
-    });
-    
+    const artifact = await deployments.getExtendedArtifact("ContractUUPS");
+    let proxyDeployments = {
+        address: ContractUUPS.address,
+        ...artifact
+    };
+    let implDeployments = {
+        address: implementation,
+        ...artifact
+    };
+    await save("ContractUUPS", proxyDeployments);
+    await save("ContractUUPS_Impl", implDeployments);
+
 };
 export default func;
-func.tags = ['Proxy'];
+func.tags = ['ProxyOZ'];

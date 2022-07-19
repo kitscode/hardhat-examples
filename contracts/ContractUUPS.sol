@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
-contract LogicContractUUPS is OwnableUpgradeable, UUPSUpgradeable {
+contract ContractUUPS is OwnableUpgradeable, UUPSUpgradeable {
 
     uint256 public index;
 

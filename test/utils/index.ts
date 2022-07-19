@@ -1,14 +1,19 @@
-import {deployments, ethers, getNamedAccounts, network, upgrades} from "hardhat";
+import {deployments, ethers, getNamedAccounts, network} from "hardhat";
 import {Contract} from 'ethers';
 import {
-    Create, FeedRegistryConsumer,
-    MyToken, Proxy,
+    ContractUUPS,
+    Create,
+    FeedRegistryConsumer,
+    GovernorComp,
+    MyToken,
     ReceiveEther,
+    Seller,
     SendEther,
     TempTest,
-    TestERC, TestGovernor,
+    TestERC,
+    TestGovernor,
     TimelockController,
-    TokenVote, V1, V2, Seller, GovernorComp, LogicContract, LogicContractUUPS
+    TokenVote
 } from "../../typechain";
 
 export async function setupUser<T extends { [contractName: string]: Contract }>(
@@ -36,13 +41,9 @@ export const setup = deployments.createFixture(async () => {
         TimelockController: await ethers.getContract<TimelockController>('TimelockController'),
         TestGovernor: await ethers.getContract<TestGovernor>('TestGovernor'),
         GovernorComp: await ethers.getContract<GovernorComp>('GovernorComp'),
-        Proxy: await ethers.getContract<Proxy>('Proxy'),
-        V1: await ethers.getContract<V1>('V1'),
-        V2: await ethers.getContract<V2>('V2'),
         FeedRegistryConsumer: await ethers.getContract<FeedRegistryConsumer>('FeedRegistryConsumer'),
         Seller: await ethers.getContract<Seller>('Seller'),
-        LogicContractUUPS: await ethers.getContract<LogicContractUUPS>('LogicContractUUPS'),
-        LogicContractUUPS_Proxy: await ethers.getContract<LogicContractUUPS>('LogicContractUUPS_Proxy'),
+        ContractUUPS: await ethers.getContract<ContractUUPS>('ContractUUPS'),
     };
     const {owner, user1, user2} = await getNamedAccounts();
     return {
