@@ -4,7 +4,7 @@ import {
     ContractUUPS,
     Create,
     FeedRegistryConsumer,
-    GovernorComp,
+    GovernorComp, Merkle,
     MyToken,
     ReceiveEther,
     Seller,
@@ -44,13 +44,16 @@ export const setup = deployments.createFixture(async () => {
         FeedRegistryConsumer: await ethers.getContract<FeedRegistryConsumer>('FeedRegistryConsumer'),
         Seller: await ethers.getContract<Seller>('Seller'),
         ContractUUPS: await ethers.getContract<ContractUUPS>('ContractUUPS'),
+        Merkle: await ethers.getContract<Merkle>('Merkle'),
     };
-    const {owner, user1, user2} = await getNamedAccounts();
+    const {owner, user1, user2, user10} = await getNamedAccounts();
+    
     return {
         ...contracts,
         owner: await setupUser(owner, contracts),
         user1: await setupUser(user1, contracts),
-        user2: await setupUser(user2, contracts)
+        user2: await setupUser(user2, contracts),
+        user10: await setupUser(user10, contracts)
     };
 });
 

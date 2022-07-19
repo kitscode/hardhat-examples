@@ -6,8 +6,6 @@ const func: DeployFunction = async function ({deployments, getNamedAccounts, net
 
     const {save} = deployments;
 
-    console.log("live:", network.live);
-
     const contractFactory = await ethers.getContractFactory("ContractUUPS");
     const ContractUUPS = await upgrades.deployProxy(contractFactory, [10], {kind: "uups"});
     console.log("proxy:", ContractUUPS.address);
